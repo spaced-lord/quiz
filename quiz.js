@@ -2,10 +2,15 @@ const startBtn = document.getElementById('startBtn')
 const questionBoxEl = document.getElementById('question-box')
 const questionEl = document.getElementById('question')
 const answerBtnEl = document.getElementById('answer-btns')
+const timerEl = document.getElementById('timer')
 
 let queShuffle, currentQuestion
 
 startBtn.addEventListener('click', startGame)
+nextQuestion.addEventListener('click', () => {
+    currentQuestionIndex++
+    nextQuestion()
+})
 
 // Start button
 function startGame() {
@@ -16,10 +21,18 @@ function startGame() {
     nextQuestion();
 } 
 
+function startTime() {
+    const minutes = Math.floor(time/60);
+    let seconds = time % 60;
+
+    timerEl.innerHTML = '${mintues}: ${seconds}';
+    time --;
+}
+
 // Move to next question with answer, reset
-function nextQuestion() {
+function nextQuestion() {``
     resetState()
-    showQuestion(queShuffle[currentQuestion]);
+    showQuestion(queShuffle[currentQuestion])
 }
 
 // Show question and answers in question box
@@ -38,6 +51,8 @@ function showQuestion(question) {
 }
 
 function resetState() {
+    clearStatusClass(document.body);
+    nextButton.classList.add('hide');
     while (answerBtnEl.firstChild) {
         answerBtnEl.removeChild
         (answerBtnEl.firstChild)
@@ -52,7 +67,14 @@ function chooseAnswer(e) {
     Array.from(answerBtnEl.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
-} 
+    if (queShuffle.length > currentQuestionIndex + 1) {
+        nextButton.classList.remove('hide')
+    } else {
+        startBtn.innerText = 'Restart'
+        startBtn.classList.remove('hide')
+    }  
+}   
+
 
 
 // if statements for question actions
@@ -92,7 +114,10 @@ const questions = [
         ],
     },
     {
-        question: "What is the name of the illegal casino run by Ben Horne?",
+        question: "What is the name of the casino run b
+
+
+y Ben Horne?",
         answer: [
             {text: "Ace In the Hole", correct: false},
             {text: "Blackjack's", correct: false},
@@ -103,18 +128,20 @@ const questions = [
     {
         question: "In the black lodge, Laura tells Dale Cooper that 'Sometimes my arms ____?",
         answer: [
-            {text: "go up", correct: false},
+            {text: "fly up", correct: false},
             {text: "fall off", correct: false},
             {text: "bend back", correct: true},
             {text: "go numb", correct: false}
         ],
+    },
+    {
+        question: "What warning does The Giant give Dale Cooper after he is shot?",
+        answer: [
+            {text: "Watch your back.", correct: false},
+            {text: "The car is unlocked", correct: false},
+            {text: "It's happening again.", correct: true},
+            {text: "They aren't who they seem", correct: false}
+        ]
     }
 ] 
 console.log(questions)
-
-
-
-
-
-
-

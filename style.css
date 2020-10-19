@@ -12,6 +12,7 @@ body {
     background: red;
     border: white black solid 5px;
     border-radius: 10px;
+    text-align: center;
     padding: 10em;
     position: absolute;
     top: 150px;
@@ -45,6 +46,11 @@ body {
 }
 
 .start-btn {
+    font-size: 20px;
+    text-emphasis: bold;
+}
+
+.timer {
     font-size: 20px;
     text-emphasis: bold;
 }

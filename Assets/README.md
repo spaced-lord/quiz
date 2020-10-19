@@ -1,2 +1,0 @@
-# quiz
-Twin Peaks quiz
